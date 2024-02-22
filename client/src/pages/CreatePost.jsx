@@ -66,6 +66,17 @@ const CreatePost = () => {
     setForm({ ...form, prompt: randomPropmt });
   };
 
+  /*
+  this function works: 
+  
+  so the response is awaiting for the fetch request to complete, 
+
+  the fetch request has 2 parameters which are the endpoint and the response from the backend
+  if the response is okay, it will be returned from the end point and will pass to the  
+  body. 
+
+  if the 
+  */
   const generateImage = async () => {
     if (form.prompt) {
       try {
