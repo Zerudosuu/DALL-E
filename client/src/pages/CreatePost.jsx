@@ -5,8 +5,11 @@ import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
 
+// Create Post function
 const CreatePost = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // we declare navigate with the value of function useNavigate
+
+  //setting useState with default object with values
   const [form, setForm] = useState({
     name: "",
     prompt: "",
@@ -16,29 +19,40 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // this function handles submit events
   const handleSubmit = async (e) => {
+    // this prevents from clearing the form when submmitted
     e.preventDefault();
-    if (form.prompt && form.photo) {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          "https://imagegen-ib97.onrender.com/api/v1/post",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ...form }),
-          }
-        );
 
+    // Check if both form.prompt and form.photo are truthy (i.e., not null or undefined)
+    if (form.prompt && form.photo) {
+      // If conditions are met, set loading state to true
+      setLoading(true);
+
+      // Use try-catch block to handle potential errors during the asynchronous operation
+      try {
+        // Send a POST request to "http://localhost:8080/api/v1/post"
+        const response = await fetch("http://localhost:8080/api/v1/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // Convert form data to JSON and include it in the request body
+          body: JSON.stringify({ ...form }),
+        });
+
+        // Check if the response status is OK (status code 200-299)
         if (response.ok) {
+          // If OK, parse the response as JSON (assuming it returns JSON)
           await response.json();
+          // Navigate to the "/" route (assuming there's a navigate function available)
           navigate("/");
         }
       } catch (error) {
+        // If an error occurs during the try block, display an alert with the error message
         alert(error);
       } finally {
+        // Regardless of success or failure, set loading state back to false
         setLoading(false);
       }
     }

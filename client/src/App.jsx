@@ -1,9 +1,17 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { Home, CreatePost } from "./pages";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"; // import browserRouter from "react-router
+import { Home, CreatePost } from "./pages"; // import from pages.js
 
 import { logo } from "./assets";
 const App = () => {
   return (
+    /* Adding BrowserRouter routes to navigate through pages 
+     Link is a function from react router that takes the user to other page when clicked
+
+     this program follows semantic HTML style that allows navigation smoothly as well as SEO
+     Route are setup inside the Routes to ensure that the navigation continues
+     
+     
+     */
     <BrowserRouter>
       <header className="w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] ">
         <Link to="/">
